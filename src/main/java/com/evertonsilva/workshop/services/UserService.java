@@ -1,12 +1,14 @@
 package com.evertonsilva.workshop.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.evertonsilva.workshop.domain.User;
 import com.evertonsilva.workshop.ropositories.UserRepository;
+import com.evertonsilva.workshop.services.exception.ObjectNotFoundException;
 
 @Service
 public class UserService {
@@ -18,5 +20,9 @@ public class UserService {
 		return userRepository.findAll();
 	}
 	
+	public User findById(String id) {
+		Optional<User> obj = userRepository.findById(id);
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Obejeto não encontrado!"));
+	}
 	
 }
