@@ -1,13 +1,16 @@
 package com.evertonsilva.workshop.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.evertonsilva.workshop.dto.AuthorDTO;
+import com.evertonsilva.workshop.dto.ComentDTO;
 
 @Document
 public class Post implements Serializable{
@@ -21,6 +24,7 @@ public class Post implements Serializable{
 	private String body;
 	
 	private AuthorDTO author;
+	private List<ComentDTO> comments = new ArrayList<>();
 
 
 	public Post(String id, Date date2, String title, String body, AuthorDTO author) {
@@ -71,6 +75,14 @@ public class Post implements Serializable{
 	public void setAuthor(AuthorDTO author) {
 		this.author = author;
 	}
+	
+	public List<ComentDTO> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<ComentDTO> comments) {
+		this.comments = comments;
+	}
 
 	@Override
 	public int hashCode() {
@@ -88,6 +100,8 @@ public class Post implements Serializable{
 		Post other = (Post) obj;
 		return Objects.equals(id, other.id);
 	}
+
+	
 	
 	
 	
